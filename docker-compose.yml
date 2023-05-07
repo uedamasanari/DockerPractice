@@ -10,9 +10,11 @@ services:
     command: sh -c "yarn install && yarn dev"
 
   php:
-    image: php:7.4-fpm
+    build: ./backend
     volumes:
       - ./backend:/var/www/html
+    expose:
+    - 9000
     
   mysql:
     image: mysql:8.0
@@ -25,6 +27,27 @@ services:
       - '3306:3306'
     volumes:
       - mysql-data:/var/lib/mysql
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./backend:/var/www/html
+    ports:
+      - '8000:80'
+    depends_on:
+      - php
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: your_user
+      PMA_PASSWORD: your_password
+    ports:
+      - '8080:80'
+    depends_on:
+      - mysql
+
 
 volumes:
   mysql-data:
