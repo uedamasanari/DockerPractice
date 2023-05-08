@@ -19,7 +19,7 @@ if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
 
 // Save the uploaded file
 $image = $_FILES['image'];
-$uploadDir = 'uploads/';
+$uploadDir = '../uploads/';
 $filename = uniqid() . '_' . $image['name'];
 $filePath = $uploadDir . $filename;
 

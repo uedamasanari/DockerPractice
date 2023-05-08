@@ -63,7 +63,7 @@ const ImageUploadForm: React.FC = () => {
       <div>
         {images.map((image) => (
           <div key={image.id}>
-            <img src={`http://localhost:8000/api/uploads/${image.path}`} alt="Uploaded" width="200" />
+            <img src={`http://localhost:8000/uploads/${image.path}`} alt="Uploaded" width="200" />
           </div>
         ))}
       </div>
